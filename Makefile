@@ -13,16 +13,12 @@ BOBJ = $(BSRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	ar -rc $(NAME) $(OBJ)
-
-$(OBJ) : $(SRC)
-	cc $(CFLAGS) -c $(SRC)
 
 bonus : $(BOBJ)
 
-$(BOBJ) : $(BSRC)
-	cc $(CFLAGS) -c $(BSRC)
-	ar -rc $(NAME) $(BOBJ)
+.c.o:
+	cc $(CFLAGS) -c $<
+	ar -rcs $(NAME) $@
 
 clean:
 	rm -f $(OBJ) $(BOBJ)
